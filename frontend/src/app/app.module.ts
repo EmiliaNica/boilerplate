@@ -9,6 +9,11 @@ import { PagesModule } from './pages/pages.module';
 import { AuthModule } from './auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
 
+import { userService } from './userService.service';
+import { HttpClientModule } from '@angular/common/http';
+import { courseService } from './courseService.service';
+import { recordService } from './recordService.service';
+
 
 @NgModule({
   declarations: [
@@ -20,9 +25,10 @@ import { AppRoutingModule } from './app-routing.module';
     PagesModule,
     AuthModule,
     BrowserModule,
-    ClarityModule
+    ClarityModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [userService, courseService, recordService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

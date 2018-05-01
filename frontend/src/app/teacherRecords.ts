@@ -1,5 +1,5 @@
 
-export class teacherRecors{
+export class teacherRecords{
     constructor(public student:string, public grade:number){
 
         
