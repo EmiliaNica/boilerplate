@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
+import { AuthModule } from './auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
 
 
@@ -17,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     CommonModule,
     PagesModule,
+    AuthModule,
     BrowserModule,
     ClarityModule
   ],
