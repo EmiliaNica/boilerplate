@@ -11,7 +11,7 @@ export class userService {
 
   }
 
-  getHeroes(): Observable<users[]> {
+  getEveryone(): Observable<users[]> {
 
     return this.HttpClient.get<users[]>( 'http://localhost:3000/users');
 

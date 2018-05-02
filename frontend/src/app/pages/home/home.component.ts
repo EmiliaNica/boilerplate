@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { courses } from '../../courses';
-import { teacherRecords } from '../../teacherRecords';
-import { studentRecords } from '../../studentRecords';
-import { users } from '../../users';
-import { records } from '../../records';
+import { Component, OnInit, Injectable, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { users } from '../../users';
+import { courses } from '../../courses';
+import { records } from '../../records';
 import { recordService } from '../../recordService.service';
 import { courseService } from '../../courseService.service';
 import { userService } from '../../userService.service';
+import { element } from 'protractor';
+import { studentRecords } from '../../studentRecords';
+import { teacherRecords } from '../../teacherRecords';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
+
+
   courses: courses[];
   course: courses;
   selectedCourse: courses;
@@ -28,8 +32,8 @@ export class HomeComponent implements OnInit {
   teacherCourse: courses;
   courseOption: courses;
   entriesLoaded: boolean = false;
-  recordStud: studentRecords[] = [];
-  recordTeach:teacherRecords[] =[];
+  entryDetalis: studentRecords[] = [];
+  entriesTeachers:teacherRecords[] =[];
   teachersStudents:users[] =[];
   teachersSelectedStudent:users;
   newGrade:number;
@@ -39,7 +43,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   
-    if (!this.loggedUser.teacher) { // daca e student
+    if (!this.loggedUser.teacher) {
       this.UserService.getTeachers().subscribe((_teachers: users[]) => {
         this.teachers = _teachers;
 
@@ -69,7 +73,7 @@ export class HomeComponent implements OnInit {
           _entries.forEach((entry: records) => {
             if (entry.courseID == element.id) {
               isContained = true;
-              this.recordStud.push(new studentRecords(this.diplayCourseName(entry), this.displayTeacherName(entry), entry.grade));
+              this.entryDetalis.push(new studentRecords(this.diplayCourseName(entry), this.displayTeacherName(entry), entry.grade));
             }
             entryDetalisIndex++;
           });
@@ -91,7 +95,7 @@ export class HomeComponent implements OnInit {
         _entries.forEach((_entry:records)=>{
           _students.forEach((_student:users) =>{
             if(_entry.studID == _student.id){
-              this.recordTeach.push(new teacherRecords(_student.name,_entry.grade));
+              this.entriesTeachers.push(new teacherRecords(_student.name,_entry.grade));
               this.teachersStudents.push(_student);
             }
           });

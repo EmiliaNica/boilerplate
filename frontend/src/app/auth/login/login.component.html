@@ -1,7 +1,22 @@
+<body>
+  <div class=login>
 
-<p>
+        <h2>Login</h2> 
 
-  HEY 
+        <div class="form-group" >
+            <input type="text" class="form-control" id="idUsername" name="usr"  [(ngModel)]="usr"  placeholder="Enter username" >
+        </div>
 
-  
-</p>
+        <div class="form-group">
+          <input type="password" class="form-control" id="idPassword" name="pass" [(ngModel)]="pass" placeholder="Enter password" >
+        </div>
+
+        <p class="text-danger">{{status}}</p>
+
+        <button type="button" class="btn btn-primary" (click)="onClick()">Login</button>
+
+        <!-- <a href="http://localhost:4200/#/pages/home"><button type="button" class="btn btn-primary">Login</button></a> -->
+
+
+  </div>
+</body>

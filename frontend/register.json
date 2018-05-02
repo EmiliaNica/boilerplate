@@ -8,14 +8,14 @@
         "password": "miruna"
       },
       {
-        "id": 1,
+        "id": 2,
         "name": "Balta Denisa",
         "teacher": false,
         "username": "deni",
         "password": "denisa"
       },
       {
-        "id": 1,
+        "id": 3,
         "name": "Nam Idee",
         "teacher": true,
         "username": "profesor",

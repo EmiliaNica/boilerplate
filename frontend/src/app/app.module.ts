@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { courseService } from './courseService.service';
 import { recordService } from './recordService.service';
 
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { recordService } from './recordService.service';
     AuthModule,
     BrowserModule,
     ClarityModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [userService, courseService, recordService],
   bootstrap: [AppComponent]
