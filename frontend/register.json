@@ -20,6 +20,20 @@
         "teacher": true,
         "username": "profesor",
         "password": "profesor"
+      },
+      {
+        "id": 4,
+        "name": "Nam Idee2",
+        "teacher": true,
+        "username": "profesor1",
+        "password": "profesor1"
+      },
+      {
+        "id": 5,
+        "name": "Nam Idee3",
+        "teacher": true,
+        "username": "profesor2",
+        "password": "profesor2"
       }
     ],
     "records": [
@@ -46,28 +60,29 @@
         "studID": 2,
         "grade": 9,
         "id": 4
+      },
+      {
+        "courseID": 3,
+        "studID": 2,
+        "grade": 4,
+        "id": 5
       }
     ],
     "courses": [
       {
         "id": 1,
-        "teachID": 2,
+        "teachID": 3,
         "name": "Informatica"
       },
       {
         "id": 2,
-        "teachID": 8,
+        "teachID": 4,
         "name": "Matematica"
       },
       {
-        "teachID": "4",
+        "teachID": 5,
         "name": "Maghiara",
         "id": 3
-      },
-      {
-        "teachID": "12",
-        "name": "Inginerie",
-        "id": 4
       }
     ]
   }

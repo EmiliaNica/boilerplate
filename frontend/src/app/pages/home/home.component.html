@@ -9,16 +9,15 @@
       </thead>
       <tbody>
   
-        <tr *ngFor ="let record of recordStud">
-          <td>{{record.course}}</td>
-          <td>{{record.teacher}}</td>
-          <td>{{record.grade}}</td>
+        <tr *ngFor ="let entry of entryDetalis">
+          <td>{{entry.course}}</td>
+          <td>{{entry.teacher}}</td>
+          <td>{{entry.grade}}</td>
         </tr>
-  
-  
       </tbody>
     </table>
-  </div>
+</div>
+
   
   <div class=table >
     <table class="table table-hover" *ngIf="loggedUser.teacher">
@@ -30,54 +29,11 @@
       </thead>
       <tbody>
   
-        <tr *ngFor ="let record of recordTeach">
-          <td>{{record.student}}</td>
-          <td>{{record.grade}}</td>
+        <tr *ngFor ="let entry of entriesTeachers">
+          <td>{{entry.student}}</td>
+          <td>{{entry.grade}}</td>
           
         </tr>
-  
-  
       </tbody>
     </table>
-  </div>
-  
-  <div class="courses">
-    <div *ngIf="!loggedUser.teacher">
-      <fieldset>
-        <legend>Choose course</legend>
-        <div class="form-group" >
-          <select class="custom-select"  [(ngModel)] = "selectedCourse">
-            <option *ngFor= " let course of unatendedCourses" [ngValue]= "course">{{course.name}}</option>
-          </select>
-        </div>
-        <button type="button" class="btn btn-primary" (click)="onSelectCourseClick()">Select</button>
-      </fieldset>
-    </div>
-  
-    <div   *ngIf="loggedUser.teacher">
-      <fieldset>
-        <legend *ngIf="!getIsTeaching()">Choose course </legend>
-        <div class="form-group" *ngIf="!getIsTeaching()">
-          <select class="custom-select" [(ngModel)] = "selectedTeacherCourse" >
-            <option *ngFor= " let course of freeCourses" [ngValue]= "course">{{course.name}}</option>
-          </select>
-        </div>
-        <button type="button" class="btn btn-primary" (click)="onSelectCourseClick()" *ngIf="!getIsTeaching()">Select</button>
-      </fieldset>
-  
-      <fieldset>
-        <legend *ngIf="getIsTeaching()">Choose student</legend>
-        <div class="form-group">
-          <select class="custom-select" [(ngModel)]="teachersSelectedStudent" *ngIf="getIsTeaching()">
-            <option *ngFor ="let student of teachersStudents" [ngValue]="student">{{student.name}}</option>
-          </select>
-        </div>
-      </fieldset>
-  
-      <fieldset > 
-        <legend *ngIf="getIsTeaching()">New grade</legend>
-        <input type="number" class="form-control" placeholder="Enter grade" [(ngModel)]="newGrade" *ngIf="getIsTeaching()">
-        <button type="button" class="btn btn-primary" *ngIf="getIsTeaching()" (click)="updateGrade()">Set grade</button>
-      </fieldset>
-    </div>
   </div>

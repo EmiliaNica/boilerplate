@@ -15,11 +15,11 @@ export class recordService {
   }
 
   getEntriesForStudent(studID:number):Observable<records[]>{
-    return this.http.get<records[]>('http://localhost:3000/records?id_student='+studID);
+    return this.http.get<records[]>('http://localhost:3000/records?studID='+studID);
   }
 
   getEntriesForTeacher(courseID:number):Observable<records[]>{
-    return this.http.get<records[]>('http://localhost:3000/records?id_course='+courseID);
+    return this.http.get<records[]>('http://localhost:3000/records?courseID='+courseID);
   }
 
   updateEntry(record:records):Observable<any>{

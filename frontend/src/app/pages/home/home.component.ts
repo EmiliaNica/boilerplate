@@ -6,7 +6,6 @@ import { records } from '../../records';
 import { recordService } from '../../recordService.service';
 import { courseService } from '../../courseService.service';
 import { userService } from '../../userService.service';
-import { element } from 'protractor';
 import { studentRecords } from '../../studentRecords';
 import { teacherRecords } from '../../teacherRecords';
 
@@ -38,16 +37,16 @@ export class HomeComponent implements OnInit {
   teachersSelectedStudent:users;
   newGrade:number;
 
-  constructor(private thisRoute: ActivatedRoute, private entryService: recordService, private coursesService: courseService,
-    private UserService: userService) {}
+  constructor(private thisRoute: ActivatedRoute, private recordService: recordService, private courseService: courseService,
+    private userService: userService) {}
 
   ngOnInit() {
   
-    if (!this.loggedUser.teacher) {
-      this.UserService.getTeachers().subscribe((_teachers: users[]) => {
+    if (!this.loggedUser.teacher) { //not teacher
+      this.userService.getTeachers().subscribe((_teachers: users[]) => {
         this.teachers = _teachers;
 
-        this.coursesService.getCourses().subscribe((res: courses[]) => {
+        this.courseService.getCourses().subscribe((res: courses[]) => {
           res.forEach(element => {
             this.unatendedCourses.push(element);
           });
@@ -61,9 +60,9 @@ export class HomeComponent implements OnInit {
 
 
   getEntriesForLoggedStudent() {
-    this.entryService.getEntriesForStudent(this.loggedUser.id).subscribe((_entries: records[]) => {
+    this.recordService.getEntriesForStudent(this.loggedUser.id).subscribe((_entries: records[]) => {
       if (_entries.length > 0) {
-        let unatCoursesAux: courses[] = [];
+        let unatCoursesAux: courses[] = []; //unatended course
         this.unatendedCourses.forEach((element: courses) => {
 
           let isContained: boolean = false;
@@ -81,17 +80,17 @@ export class HomeComponent implements OnInit {
             unatCoursesAux.push(element);
           }
         });
-        this.entries = _entries;
-        this.unatendedCourses = unatCoursesAux;
+        this.entries = _entries; //good entries
+        this.unatendedCourses = unatCoursesAux; // unatended courses
       }
-      this.entriesLoaded = true;
+      this.entriesLoaded = true; // entries -  loaded
     });
   }
 
   getEntriesForLoggedTeacher(){
-    this.entryService.getEntriesForTeacher(this.course.id).subscribe((_entries:records[])=>{
+    this.recordService.getEntriesForTeacher(this.course.id).subscribe((_entries:records[])=>{
       
-      this.UserService.getStudents().subscribe((_students:users[])=>{
+      this.userService.getStudents().subscribe((_students:users[])=>{
         _entries.forEach((_entry:records)=>{
           _students.forEach((_student:users) =>{
             if(_entry.studID == _student.id){
@@ -106,7 +105,7 @@ export class HomeComponent implements OnInit {
   }
 
   getFreeCourses() {
-    this.coursesService.getFreeCourses().subscribe((_freeCourses: courses[]) => {
+    this.courseService.getFreeCourses().subscribe((_freeCourses: courses[]) => {
       this.freeCourses = _freeCourses;
 
     });
@@ -124,12 +123,12 @@ export class HomeComponent implements OnInit {
     if (!(this.loggedUser.teacher)) {
       if (!(this.selectedCourse === null) || (this.selectedCourse === undefined)) {
         let _entry = {
-          id_course: this.selectedCourse.id,
-          id_student: this.loggedUser.id,
+          courseID: this.selectedCourse.id,
+          studID: this.loggedUser.id,
           grade: 0
 
         };
-        this.entryService.addEntry(_entry).subscribe(res => {
+        this.recordService.addEntry(_entry).subscribe(res => {
           window.location.reload();
         });
 
@@ -139,7 +138,7 @@ export class HomeComponent implements OnInit {
     else {
 
       this.selectedTeacherCourse.teachID = this.loggedUser.id;
-      this.coursesService.updateCourse(this.selectedTeacherCourse).subscribe(res => {
+      this.courseService.updateCourse(this.selectedTeacherCourse).subscribe(res => {
         window.location.reload();
 
       });
@@ -179,17 +178,6 @@ export class HomeComponent implements OnInit {
     return this.isTeaching;
   }
 
-  updateGrade(){
-    this.entries.forEach(_entry=>
-    {
-      if(_entry.studID == this.teachersSelectedStudent.id){
-        _entry.grade = this.newGrade;
-        this.entryService.updateEntry(_entry).subscribe(res=>{
-          window.location.reload();
-        });
-      }
-    });
-  }
 
 
 }

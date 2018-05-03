@@ -25,11 +25,11 @@ export class userService {
   }
 
   getTeachers():Observable<users[]>{
-    return this.HttpClient.get<users[]>("http://localhost:3000/users?isTeacher=true");
+    return this.HttpClient.get<users[]>("http://localhost:3000/users?teacher=true");
   }
 
   getStudents():Observable<users[]>{
-    return this.HttpClient.get<users[]>("http://localhost:3000/users?isTeacher=false");
+    return this.HttpClient.get<users[]>("http://localhost:3000/users?teacher=false");
   }
 
 }
